@@ -1,7 +1,7 @@
 #ifndef PILA_H_
 #define PILA_H_
-#include <stdlib.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 typedef struct _pila_t pila_t;
 
@@ -46,4 +46,4 @@ bool pila_vacia(pila_t *pila);
  */
 void pila_destruir(pila_t *pila);
 
-#endif // PILA_H_
+#endif  // PILA_H_

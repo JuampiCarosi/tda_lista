@@ -20,41 +20,41 @@ void listaSeCreaVacia() {
 
 void listaTamanio() {
   lista_t *lista = lista_crear();
-  void *elemento = malloc(sizeof(int));
-  lista_insertar(lista, elemento);
+  char a = 'a';
+  lista_insertar(lista, &a);
   pa2m_afirmar(lista_tamanio(lista) == 1, "La cantidad de elementos es 1");
-  void *elemento2 = malloc(sizeof(int));
-  lista_insertar(lista, elemento2);
+  char b = 'b';
+  lista_insertar(lista, &b);
   pa2m_afirmar(lista_tamanio(lista) == 2, "La cantidad de elementos es 2");
-  lista_destruir_todo(lista, eliminar_elemento);
+  lista_destruir(lista);
 }
 
 void listaPrimeroDevuelveElPrimerElemento() {
   lista_t *lista = lista_crear();
   if (!lista) return;
-  void *elemento = malloc(sizeof(int));
-  lista_insertar(lista, elemento);
-  pa2m_afirmar(lista_primero(lista) == elemento, "El primer elemento es el insertado");
-  lista_destruir_todo(lista, eliminar_elemento);
+  char a = 'a';
+  lista_insertar(lista, &a);
+  pa2m_afirmar(lista_primero(lista) == &a, "El primer elemento es el insertado");
+  lista_destruir(lista);
 }
 
 void listaUltimoDevuelveElUltimoElemento() {
   lista_t *lista = lista_crear();
   if (!lista) return;
-  void *elemento = malloc(sizeof(int));
-  lista_insertar(lista, elemento);
-  pa2m_afirmar(lista_ultimo(lista) == elemento, "El ultimo elemento es el insertado");
-  lista_destruir_todo(lista, eliminar_elemento);
+  char a = 'a';
+  lista_insertar(lista, &a);
+  pa2m_afirmar(lista_ultimo(lista) == &a, "El ultimo elemento es el insertado");
+  lista_destruir(lista);
 }
 
 void listaEstaVacia() {
   lista_t *lista = lista_crear();
   if (!lista) return;
   pa2m_afirmar(lista_vacia(lista), "La lista esta vacia");
-  void *elemento = malloc(sizeof(int));
-  lista_insertar(lista, elemento);
+  char a = 'a';
+  lista_insertar(lista, &a);
   pa2m_afirmar(!lista_vacia(lista), "La lista no esta vacia");
-  lista_destruir_todo(lista, eliminar_elemento);
+  lista_destruir(lista);
 }
 
 int comparador(void *entero1, void *entero2) {
@@ -248,7 +248,7 @@ void listaQuitar() {
   void *elemento_eliminado = lista_quitar(lista_insertada);
   pa2m_afirmar(lista_ultimo(lista_insertada) == &b, "El penultimo es el nuevo ultimo");
   pa2m_afirmar(lista_tamanio(lista_insertada) == 2, "La cantidad es 2");
-  pa2m_afirmar(elemento_eliminado == &c, "Se retorna correctamente el nuevo elemento");
+  pa2m_afirmar(elemento_eliminado == &c, "Se retorna correctamente el elemento eliminado");
   lista_destruir(lista);
 
   lista_t *lista2 = lista_crear();
@@ -286,7 +286,7 @@ void listaQuitarElemento() {
   void *elemento_eliminado = lista_quitar_de_posicion(lista_insertada, 1);
   pa2m_afirmar(lista_elemento_en_posicion(lista_insertada, 1) == &c, "Se borran correctamente los elementos");
   pa2m_afirmar(lista_tamanio(lista_insertada) == 2, "La cantidad es 2");
-  pa2m_afirmar(elemento_eliminado == &b, "Se retorna correctamente el nuevo elemento");
+  pa2m_afirmar(elemento_eliminado == &b, "Se retorna correctamente el elemento eliminado");
   lista_destruir(lista);
 }
 
@@ -392,7 +392,7 @@ void listaRecorrerExterno() {
     iterados++;
   }
   lista_iterador_destruir(iterador);
-  lista_destruir_todo(lista_insertada, eliminar_elemento);
+  lista_destruir(lista_insertada);
   pa2m_afirmar(iterados_estan_bien, "Se recorren correctamente los elementos");
   pa2m_afirmar(iterados == 4, "Se recorren la cantidad correcta de elementos");
 }
@@ -406,7 +406,7 @@ void casosInfelicesRecorrerExterno() {
   pa2m_afirmar(!lista_iterador_avanzar(NULL), "Avanzar un iterador NULL devuelve false");
 }
 
-int main() {
+void pruebas_lista() {
   pa2m_nuevo_grupo("Pruebas de creación de lista");
   listaSeCreaVacia();
 
@@ -443,6 +443,203 @@ int main() {
   pa2m_nuevo_grupo("Pruebas de recorrido externo de lista");
   listaRecorrerExterno();
   casosInfelicesRecorrerExterno();
+}
 
+void pilaSeCreaVacia() {
+  pila_t *pila = pila_crear();
+  pa2m_afirmar(pila != NULL, "Se crea una pila");
+  if (!pila) return;
+  pa2m_afirmar(pila_tope(pila) == NULL, "El nodo tope es NULL");
+  pa2m_afirmar(pila_tamanio(pila) == 0, "La cantidad de elementos es 0");
+  pila_destruir(pila);
+}
+
+void pilaTamanio() {
+  pila_t *pila = pila_crear();
+  char a = 'a', b = 'b';
+  pila_apilar(pila, &a);
+  pa2m_afirmar(pila_tamanio(pila) == 1, "La cantidad de elementos es 1");
+  pila_apilar(pila, &b);
+  pa2m_afirmar(pila_tamanio(pila) == 2, "La cantidad de elementos es 2");
+  pila_destruir(pila);
+}
+
+void pilaTope() {
+  pila_t *pila = pila_crear();
+  if (!pila) return;
+  char a = 'a';
+  pila_apilar(pila, &a);
+  pa2m_afirmar(pila_tope(pila) == &a, "El tope es el insertado");
+  pila_destruir(pila);
+}
+
+void pilaEstaVacia() {
+  pila_t *pila = pila_crear();
+  if (!pila) return;
+  pa2m_afirmar(pila_vacia(pila), "La pila esta vacia");
+  char a = 'a';
+  pila_apilar(pila, &a);
+  pa2m_afirmar(!pila_vacia(pila), "La pila no esta vacia");
+  pila_destruir(pila);
+}
+
+void pilaSeInsertaUnElemento() {
+  pila_t *pila = pila_crear();
+  if (!pila) return;
+  void *elemento = malloc(sizeof(int));
+  pila_t *pila_apilada = pila_apilar(pila, elemento);
+  if (!pila_tope(pila_apilada)) return;
+  pa2m_afirmar(pila_tamanio(pila_apilada) == 1, "La cantidad de elementos es 1 al apilar");
+  pa2m_afirmar(pila_tope(pila_apilada) == elemento, "El elemento del nodo tope es el mismo que el elemento insertado");
+  pila_destruir(pila_apilada);
+  free(elemento);
+}
+
+void pilaDesapilar() {
+  pila_t *pila = pila_crear();
+  if (!pila) return;
+  char a = 'a', b = 'b', c = 'c';
+
+  pila_t *pila_apilada = pila_apilar(pila, &a);
+  pila_apilada = pila_apilar(pila_apilada, &b);
+  pila_apilada = pila_apilar(pila_apilada, &c);
+
+  void *elemento_eliminado = pila_desapilar(pila_apilada);
+  pa2m_afirmar(pila_tope(pila_apilada) == &b, "El penultimo es el nuevo tope");
+  pa2m_afirmar(pila_tamanio(pila_apilada) == 2, "La cantidad es 2 al desapilar");
+  pa2m_afirmar(elemento_eliminado == &c, "Se retorna correctamente el elemento eliminado");
+  pila_destruir(pila);
+
+  pila_t *pila2 = pila_crear();
+  if (!pila2) return;
+  char d = 'd';
+
+  pila_t *pila2_apilada = pila_apilar(pila2, &d);
+  pila_desapilar(pila2_apilada);
+
+  pa2m_afirmar(pila_tope(pila2_apilada) == NULL, "Al eliminar el elemento de una pila de cantidad 1 ultimo es NULL");
+  pa2m_afirmar(pila_tamanio(pila2_apilada) == 0, "La cantidad es 0 al desapilar");
+  pila_destruir(pila2_apilada);
+}
+
+void casosInfelicesPila() {
+  pa2m_afirmar(pila_apilar(NULL, NULL) == NULL, "Apilar en una pila NULL devuelve NULL");
+  pa2m_afirmar(pila_desapilar(NULL) == NULL, "Desapilar en una pila NULL devuelve NULL");
+  pa2m_afirmar(pila_tope(NULL) == NULL, "Tope en una pila NULL devuelve NULL");
+  pa2m_afirmar(pila_vacia(NULL), "Vacia en una pila NULL devuelve true");
+  pa2m_afirmar(pila_tamanio(NULL) == 0, "Tamanio en una pila NULL devuelve 0");
+}
+
+void pruebasPila() {
+  pa2m_nuevo_grupo("Pruebas de pila");
+  pilaSeCreaVacia();
+  pilaTamanio();
+  pilaTope();
+  pilaEstaVacia();
+  pilaSeInsertaUnElemento();
+  pilaDesapilar();
+  casosInfelicesPila();
+}
+
+void colaSeCreaVacia() {
+  cola_t *cola = cola_crear();
+  pa2m_afirmar(cola != NULL, "Se crea una cola");
+  if (!cola) return;
+  pa2m_afirmar(cola_frente(cola) == NULL, "El nodo frente es NULL");
+  pa2m_afirmar(cola_tamanio(cola) == 0, "La cantidad de elementos es 0");
+  cola_destruir(cola);
+}
+
+void colaTamanio() {
+  cola_t *cola = cola_crear();
+  char a = 'a', b = 'b';
+  cola_encolar(cola, &a);
+  pa2m_afirmar(cola_tamanio(cola) == 1, "La cantidad de elementos es 1");
+  cola_encolar(cola, &b);
+  pa2m_afirmar(cola_tamanio(cola) == 2, "La cantidad de elementos es 2");
+  cola_destruir(cola);
+}
+
+void colaFrente() {
+  cola_t *cola = cola_crear();
+  if (!cola) return;
+  char a = 'a';
+  cola_encolar(cola, &a);
+  pa2m_afirmar(cola_frente(cola) == &a, "El frente es el insertado");
+  cola_destruir(cola);
+}
+
+void colaEstaVacia() {
+  cola_t *cola = cola_crear();
+  if (!cola) return;
+  pa2m_afirmar(cola_vacia(cola), "La cola esta vacia");
+  char a = 'a';
+  cola_encolar(cola, &a);
+  pa2m_afirmar(!cola_vacia(cola), "La cola no esta vacia");
+  cola_destruir(cola);
+}
+void colaSeInsertaUnElemento() {
+  cola_t *cola = cola_crear();
+  if (!cola) return;
+  void *elemento = malloc(sizeof(int));
+  cola_t *cola_encolada = cola_encolar(cola, elemento);
+  if (!cola_frente(cola_encolada)) return;
+  pa2m_afirmar(cola_tamanio(cola_encolada) == 1, "La cantidad de elementos es 1 al encolar");
+  pa2m_afirmar(cola_frente(cola_encolada) == elemento,
+               "El elemento del nodo frente es el mismo que el elemento insertado");
+  cola_destruir(cola_encolada);
+  free(elemento);
+}
+
+void colaDesencolar() {
+  cola_t *cola = cola_crear();
+  if (!cola) return;
+  char a = 'a', b = 'b', c = 'c';
+
+  cola_t *cola_encolada = cola_encolar(cola, &a);
+  cola_encolada = cola_encolar(cola_encolada, &b);
+  cola_encolada = cola_encolar(cola_encolada, &c);
+
+  void *elemento_eliminado = cola_desencolar(cola_encolada);
+  pa2m_afirmar(cola_frente(cola_encolada) == &b, "El segundo es el nuevo frente");
+  pa2m_afirmar(cola_tamanio(cola_encolada) == 2, "La cantidad es 2 al desencolar");
+  pa2m_afirmar(elemento_eliminado == &a, "Se retorna correctamente el elemento eliminado");
+  cola_destruir(cola);
+
+  cola_t *cola2 = cola_crear();
+  if (!cola2) return;
+  char d = 'd';
+
+  cola_t *cola2_encolada = cola_encolar(cola2, &d);
+  cola_desencolar(cola2_encolada);
+
+  pa2m_afirmar(cola_frente(cola2_encolada) == NULL, "Al eliminar el elemento de una cola de cantidad 1 frente es NULL");
+  pa2m_afirmar(cola_tamanio(cola2_encolada) == 0, "La cantidad es 0 al desencolar");
+  cola_destruir(cola2_encolada);
+}
+
+void casosInfelicesCola() {
+  pa2m_afirmar(cola_encolar(NULL, NULL) == NULL, "Encolar en una cola NULL devuelve NULL");
+  pa2m_afirmar(cola_desencolar(NULL) == NULL, "Desencolar en una cola NULL devuelve NULL");
+  pa2m_afirmar(cola_frente(NULL) == NULL, "Frente en una cola NULL devuelve NULL");
+  pa2m_afirmar(cola_vacia(NULL), "Vacia en una cola NULL devuelve true");
+  pa2m_afirmar(cola_tamanio(NULL) == 0, "Tamanio en una cola NULL devuelve 0");
+}
+
+void pruebasCola() {
+  pa2m_nuevo_grupo("Pruebas de cola");
+  colaSeCreaVacia();
+  colaTamanio();
+  colaFrente();
+  colaEstaVacia();
+  colaSeInsertaUnElemento();
+  colaDesencolar();
+  casosInfelicesCola();
+}
+
+int main() {
+  pruebas_lista();
+  pruebasPila();
+  pruebasCola();
   return pa2m_mostrar_reporte();
 }

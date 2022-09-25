@@ -21,12 +21,12 @@ pila_t *pila_apilar(pila_t *pila, void *elemento) {
 }
 
 void *pila_desapilar(pila_t *pila) {
-  if (!pila) return NULL;
+  if (!pila || pila->cantidad == 0) return NULL;
   return lista_quitar((lista_t *)pila);
 }
 
 void *pila_tope(pila_t *pila) {
-  if (!pila) return NULL;
+  if (!pila || pila->cantidad == 0) return NULL;
   return pila->nodo_fin->elemento;
 }
 

@@ -21,12 +21,12 @@ cola_t *cola_encolar(cola_t *cola, void *elemento) {
 }
 
 void *cola_desencolar(cola_t *cola) {
-  if (!cola) return NULL;
+  if (!cola || cola->cantidad == 0) return NULL;
   return lista_quitar_de_posicion((lista_t *)cola, 0);
 }
 
 void *cola_frente(cola_t *cola) {
-  if (!cola) return NULL;
+  if (!cola || cola->cantidad == 0) return NULL;
   return cola->nodo_inicio->elemento;
 }
 
