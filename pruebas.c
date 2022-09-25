@@ -76,8 +76,7 @@ void listaBuscarElemento() {
   lista_insertada = lista_insertar(lista_insertada, &c);
 
   pa2m_afirmar(lista_buscar_elemento(lista_insertada, comparador, &aux) == &b, "El elemento es encontrado");
-  pa2m_afirmar(lista_buscar_elemento(lista_insertada, comparador, &aux2) == NULL,
-               "El elemento no es encontrado");
+  pa2m_afirmar(lista_buscar_elemento(lista_insertada, comparador, &aux2) == NULL, "El elemento no es encontrado");
   lista_destruir(lista);
 }
 
@@ -93,8 +92,7 @@ void casosInfeclicesBuscarElemento() {
   pa2m_afirmar(lista_buscar_elemento(lista_insertada, comparador, NULL) == NULL,
                "El buscar elemento NULL devuelve NULL");
 
-  pa2m_afirmar(lista_buscar_elemento(lista_insertada, NULL, &aux) == NULL,
-               "El comparador NULL devuelve NULL");
+  pa2m_afirmar(lista_buscar_elemento(lista_insertada, NULL, &aux) == NULL, "El comparador NULL devuelve NULL");
   pa2m_afirmar(lista_buscar_elemento(NULL, comparador, &aux) == NULL, "La lista NULL devuelve NULL");
 
   lista_destruir(lista);
@@ -163,8 +161,7 @@ void listaSeInsertaEnPosicion() {
   lista_insertada = lista_insertar_en_posicion(lista_insertada, &d, 1);
   pa2m_afirmar(lista_elemento_en_posicion(lista_insertada, 1) == &d,
                "El elemento se inserta correctamente en posicion 1");
-  pa2m_afirmar(lista_elemento_en_posicion(lista_insertada, 2) == &b,
-               "El nodo siguiente al insertado es el mismo");
+  pa2m_afirmar(lista_elemento_en_posicion(lista_insertada, 2) == &b, "El nodo siguiente al insertado es el mismo");
   pa2m_afirmar(lista_tamanio(lista_insertada) == 4, "La cantidad de elementos es 4");
 
   char e = 'e';
@@ -174,8 +171,7 @@ void listaSeInsertaEnPosicion() {
 
   char f = 'f';
   lista_insertada = lista_insertar_en_posicion(lista_insertada, &f, 0);
-  pa2m_afirmar(lista_primero(lista_insertada) == &f,
-               "Insertar elemento en posicion 0 resulta en agrear al principio");
+  pa2m_afirmar(lista_primero(lista_insertada) == &f, "Insertar elemento en posicion 0 resulta en agrear al principio");
 
   lista_destruir(lista_insertada);
 }
@@ -188,8 +184,7 @@ void casosInfelicesInsertarPosicion() {
 
   void *elemento = malloc(sizeof(int));
   lista_t *lista_null_insertada = lista_insertar_en_posicion(NULL, elemento, 0);
-  pa2m_afirmar(lista_null_insertada == NULL,
-               "No se puede insertar un elemento en una lista NULL en posicion 0");
+  pa2m_afirmar(lista_null_insertada == NULL, "No se puede insertar un elemento en una lista NULL en posicion 0");
   free(elemento);
 
   lista_t *lista2 = lista_crear();
@@ -216,10 +211,8 @@ void listaElementoEnPosicion() {
   lista_insertada = lista_insertar(lista_insertada, &b);
   lista_insertada = lista_insertar(lista_insertada, &c);
 
-  pa2m_afirmar(lista_primero(lista_insertada) == &a,
-               "El primer elemento es el mismo que el elemento insertado");
-  pa2m_afirmar(lista_ultimo(lista_insertada) == &c,
-               "El ultimo elemento es el mismo que el elemento insertado");
+  pa2m_afirmar(lista_primero(lista_insertada) == &a, "El primer elemento es el mismo que el elemento insertado");
+  pa2m_afirmar(lista_ultimo(lista_insertada) == &c, "El ultimo elemento es el mismo que el elemento insertado");
 
   pa2m_afirmar(lista_elemento_en_posicion(lista_insertada, 0) == &a,
                "El elemento en la posicion 0 es el mismo que el elemento insertado");
@@ -235,14 +228,12 @@ void casosInfelicesEnPosicion() {
   lista_t *lista = lista_crear();
   pa2m_afirmar(lista_primero(lista) == NULL, "No se puede obtener el primer elemento de una lista vacia");
   pa2m_afirmar(lista_ultimo(lista) == NULL, "No se puede obtener el ultimo elemento de una lista vacia");
-  pa2m_afirmar(lista_elemento_en_posicion(lista, 0) == NULL,
-               "No se puede obtener el elemento 0 de una lista vacia");
+  pa2m_afirmar(lista_elemento_en_posicion(lista, 0) == NULL, "No se puede obtener el elemento 0 de una lista vacia");
   lista_destruir(lista);
 
   pa2m_afirmar(lista_primero(NULL) == NULL, "No se puede obtener el primer elemento de una lista NULL");
   pa2m_afirmar(lista_ultimo(NULL) == NULL, "No se puede obtener el ultimo elemento de una lista NULL");
-  pa2m_afirmar(lista_elemento_en_posicion(NULL, 0) == NULL,
-               "No se puede obtener el elemento 0 en una lista NULL ");
+  pa2m_afirmar(lista_elemento_en_posicion(NULL, 0) == NULL, "No se puede obtener el elemento 0 en una lista NULL ");
 }
 
 void listaQuitar() {
@@ -382,6 +373,7 @@ void casosInfelicesRecorrerInterno() {
 
 void listaRecorrerExterno() {
   lista_t *lista = lista_crear();
+
   if (!lista) return;
   char a = 'a', b = 'b', c = 'c', d = 'd';
 
