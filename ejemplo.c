@@ -41,8 +41,7 @@ void probar_operaciones_lista() {
   printf("Elementos quitado de la posicion 3 de la lista: %c\n", *valor_quitado);
 
   printf("Elementos en la lista: ");
-  for (size_t i = 0; i < lista_tamanio(lista); i++)
-    printf("%c ", *(char *)lista_elemento_en_posicion(lista, i));
+  for (size_t i = 0; i < lista_tamanio(lista); i++) printf("%c ", *(char *)lista_elemento_en_posicion(lista, i));
 
   printf("\n\n");
 
@@ -60,8 +59,7 @@ void probar_operaciones_lista() {
   printf("Imprimo TODOS LOS ELEMENTOS DE LA LISTA usando el iterador interno: \n");
   elementos_recorridos = lista_con_cada_elemento(lista, mostrar_elemento, (void *)&contador);
 
-  printf("Recorri %lu elementos con el iterador interno y sume %i elementos\n", elementos_recorridos,
-         contador);
+  printf("Recorri %lu elementos con el iterador interno y sume %i elementos\n", elementos_recorridos, contador);
 
   printf("\n");
 

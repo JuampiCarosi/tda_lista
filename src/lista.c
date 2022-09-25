@@ -130,7 +130,7 @@ void *lista_elemento_en_posicion(lista_t *lista, size_t posicion) {
 }
 
 void *lista_buscar_elemento(lista_t *lista, int (*comparador)(void *, void *), void *contexto) {
-  if (!lista || !comparador || !contexto || lista->cantidad == 0) return NULL;
+  if (!lista || !comparador || lista->cantidad == 0) return NULL;
 
   int i = 0;
   bool encontrado = false;
@@ -237,7 +237,7 @@ void lista_iterador_destruir(lista_iterador_t *iterador) {
 }
 
 size_t lista_con_cada_elemento(lista_t *lista, bool (*funcion)(void *, void *), void *contexto) {
-  if (!lista || !funcion || !contexto || lista->cantidad == 0) return 0;
+  if (!lista || !funcion || lista->cantidad == 0) return 0;
 
   size_t i = 0;
   nodo_t *nodo = lista->nodo_inicio;

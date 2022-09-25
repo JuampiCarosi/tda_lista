@@ -89,9 +89,6 @@ void casosInfeclicesBuscarElemento() {
   lista_insertada = lista_insertar(lista_insertada, &b);
   lista_insertada = lista_insertar(lista_insertada, &c);
 
-  pa2m_afirmar(lista_buscar_elemento(lista_insertada, comparador, NULL) == NULL,
-               "El buscar elemento NULL devuelve NULL");
-
   pa2m_afirmar(lista_buscar_elemento(lista_insertada, NULL, &aux) == NULL, "El comparador NULL devuelve NULL");
   pa2m_afirmar(lista_buscar_elemento(NULL, comparador, &aux) == NULL, "La lista NULL devuelve NULL");
 
@@ -352,8 +349,6 @@ void casosInfelicesRecorrerInterno() {
   pa2m_afirmar(lista_con_cada_elemento(lista_insertada, NULL, &a) == 0,
                "Recorrer una lista con funcion NULL devuelve 0");
 
-  pa2m_afirmar(lista_con_cada_elemento(lista_insertada, debe_recorrer_elementos, NULL) == 0,
-               "Recorrer una lista con contexto NULL devuelve 0");
   lista_destruir(lista_insertada);
 
   lista_t *lista3 = lista_crear();
